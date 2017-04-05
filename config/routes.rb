@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   #問い合わせ機能ののアクションを生成
   resources :contacts, only: [:new, :create] do
     collection do
