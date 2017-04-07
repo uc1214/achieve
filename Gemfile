@@ -55,3 +55,7 @@ gem 'devise'
 gem 'rails-i18n'
 
 gem 'faker'
+
+group :development do
+  gem 'letter_opener_web'
+end
