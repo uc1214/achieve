@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   #問い合わせ機能ののアクションを生成
   resources :contacts, only: [:new, :create] do
