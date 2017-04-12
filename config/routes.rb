@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  #Poem機能のアクションを生成
+  resources :poems, only: [:index, :show]
+
+  #ログイン機能のアクションを生成=＞deviseライブラリ内のコントローラに渡される
   devise_for :users
-  #問い合わせ機能ののアクションを生成
+
+  #問い合わせ機能のアクションを生成
   resources :contacts, only: [:new, :create] do
     collection do
       post :confirm
