@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
           password: Devise.friendly_token[0, 20]
       )
       user.skip_confirmation!
-      user.save(validate: false)
+      user.save
     end
     user
   end
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     end
     user
   end
-  
+
   def update_with_password(params, *options)
     if provider.blank?
       super
