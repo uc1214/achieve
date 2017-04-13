@@ -72,6 +72,8 @@ gem 'omniauth-twitter'
 
 gem 'omniauth-facebook'
 
+gem 'omniauth-oauth2', '~> 1.3.1'
+
 gem 'carrierwave'
 
 gem 'rmagick'
