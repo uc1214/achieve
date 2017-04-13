@@ -4,7 +4,6 @@ class BlogsController < ApplicationController
 
   def index
     @blog = Blog.all
-    raise
   end
 
   def new

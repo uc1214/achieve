@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :poems, only: [:index, :show]
 
   #ログイン機能のアクションを生成=＞deviseライブラリ内のコントローラに渡される
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
 
   #問い合わせ機能のアクションを生成
   resources :contacts, only: [:new, :create] do
