@@ -25,6 +25,12 @@ Rails.application.routes.draw do
     end
   end
 
+  #ブログのコメント機能のアクションを生成
+  resources :blogs do
+    resources :comments
+    post :confirm, on: :collection
+  end
+
   root 'top#index'
 
   #letter_opener_webのroutingを追加

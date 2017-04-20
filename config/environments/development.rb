@@ -39,9 +39,21 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
-  config.action_mailer.delivery_method = :letter_opener_web
+  #config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  #config.action_mailer.delivery_method = :letter_opener_web
 
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings =
+  {
+   user_name: "app63791176@heroku.com",
+   password: "ee7ut9xa4298",
+   domain: "localhost:3000",
+   address: "smtp.sendgrid.net",
+   port: 587,
+   authentication: :plain,
+   enable_starttls_auto: true
+  }
   BetterErrors::Middleware.allow_ip! "10.0.2.2"
 
 end
