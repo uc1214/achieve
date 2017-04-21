@@ -3,11 +3,15 @@
 /**
  *normalize size of image of user profile
  */
-img{
+.img{
   max-width: 100%;
 }
 
-img-user-prof{
+.width50 {
+  width: 50%;
+}
+
+.img-user-prof{
   float: left;
   border-radius: 50px;
   width: 60px;

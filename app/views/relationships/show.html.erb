@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="user_detail_show center">
+    <h2><strong>ユーザー詳細</strong></h2>
+    <br>
+    <%= profile_img(@user) %><br>
+    <%= link_to relationship_path(@user) do %>
+      <%= @user.name %>
+    <% end %><br>
+    <% unless current_user.id == @user.id %>
+      <%= render 'users/follow_form', user: @user %>
+    <% end %>
+  </div>
+  <div class="row center">
+    <div class="wrapper col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-5 col-xs-offset-1 followed_box">
+      <h4><strong><%= @user.name %>さんをフォローしているユーザー</strong></h4>
+      <%= render partial: 'index_followed', locals: { users: @user_followed } %>
+    </div>
+    <div class="wrapper col-lg-5 col-md-5 col-sm-5 col-xs-5 follower_box">
+      <h4><strong><%= @user.name %>さんがフォローしているユーザー</strong></h4>
+      <%= render partial: 'index_follower', locals: { users: @user_follower } %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'relationships/create'
+
+  get 'relationships/destroy'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  #ユーザー一覧機能
+  resources :users, only: [:index]
+
+  #フォロー機能
+  resources :relationships, only: [:show, :create, :destroy]
 
   #Poem機能のアクションを生成
   resources :poems, only: [:index, :show]

@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @blog = @comment.blog
     respond_to do |format|
-
       if @comment.save
         format.html { redirect_to blog_path(@blog), notice: 'コメントを投稿しました'}
         format.js { render :index }

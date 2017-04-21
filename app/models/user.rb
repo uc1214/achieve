@@ -5,9 +5,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
   mount_uploader :avatar, AvatarUploader
 
+  #association
   has_many :blogs, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_relationships, source: :follower
+
+  #facebook omniauth
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(email: auth.info.email)
 
@@ -26,6 +32,7 @@ class User < ActiveRecord::Base
     user
   end
 
+  #twitter omniauth
   def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid)
 
@@ -44,6 +51,7 @@ class User < ActiveRecord::Base
     user
   end
 
+  #update password
   def update_with_password(params, *options)
     if provider.blank?
       super
@@ -53,7 +61,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  #create random uid
   def self.create_unique_string
     SecureRandom.uuid
   end
+
+  #follow user selected
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  #unfollow user selected
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  #confirm user
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+
 end

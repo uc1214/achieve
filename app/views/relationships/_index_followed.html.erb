@@ -1,0 +1,14 @@
+<ul>
+  <% @users_followed.each do |user| %>
+    <div>
+      <%= profile_img(user) %><br>
+      <%= link_to relationship_path(user) do %>
+        <%= user.name %>
+      <% end %><br>
+      <% unless current_user.id == user.id %>
+        <%= render 'users/follow_form', user: user %>
+      <% end %>
+      <br>
+    </div>
+  <% end %>
+</ul>

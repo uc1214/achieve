@@ -10,7 +10,9 @@
           <%= profile_img(blog.user) if profile_img(blog.user) %>
         </div>
         <div class="col-xs-8 col-sm-7 col-md-5 col-lg-5">
-          <%= blog.user.name %>が投稿しました。
+          <%= link_to relationship_path(blog.user) do %>
+            <%= blog.user.name %>
+          <% end %>が投稿しました。
         </div>
       </div>
       <div class="clear field-blogs-content">
