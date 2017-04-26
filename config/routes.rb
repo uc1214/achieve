@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  #メッセージ機能
+  resources :conversations do
+    resources :messages
+  end
+
   #ユーザー一覧機能
   resources :users, only: [:index]
 
